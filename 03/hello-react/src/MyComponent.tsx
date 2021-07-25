@@ -1,5 +1,11 @@
-function MyComponent(props: { name: string }) {
-  return <div>안녕하세요, 제 이름은 {props.name}입니다.</div>;
+function MyComponent(props: { name: string; children: string }) {
+  return (
+    <div>
+      안녕하세요, 제 이름은 {props.name}입니다.
+      <br />
+      children 값은 {props.children}입니다.
+    </div>
+  );
 }
 
 MyComponent.defaultProps = {
