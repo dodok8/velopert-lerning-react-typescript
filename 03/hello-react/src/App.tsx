@@ -1,7 +1,8 @@
-import MyComponent from './MyComponent';
+// import MyComponent from './MyComponent';
+import Say from './Say';
 
 function App() {
-  return <MyComponent name="React" favoriteNumber={3}>리액트</MyComponent>;
+  return <Say />;
 }
 
 export default App;
