@@ -4,19 +4,6 @@ function Info() {
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
 
-  useEffect(() => {
-    console.log(name);
-  }, [name]);
-
-  useEffect(() => {
-    console.log('effect');
-    console.log(name);
-    return () => {
-      console.log('cleanup');
-      console.log(name);
-    };
-  }, [name]);
-
   function onChangeName(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
   }
@@ -33,10 +20,10 @@ function Info() {
       </div>
       <div>
         <div>
-          <b>이름:</b> {name}
+          <b>name:</b> {name}
         </div>
         <div>
-          <b>닉네임:</b> {nickname}
+          <b>nickname:</b> {nickname}
         </div>
       </div>
     </div>
