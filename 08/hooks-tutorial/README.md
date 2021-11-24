@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# 그 외 Hook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## [`useImperativeHandle`](https://ko.reactjs.org/docs/hooks-reference.html#useimperativehandle)
 
-## Available Scripts
+`ref`가 부모 컴포넌트에서 노출될 때, 그 인스턴스를 커스텀해서 사용할 수 있습니다. `[forwardRef](https://ko.reactjs.org/docs/react-api.html#reactforwardref)`와 같이 사용하세요.
 
-In the project directory, you can run:
+```typescript react
 
-### `yarn start`
+function FancyInput(props, ref) {
+  const inputRef = useRef();
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+      console.log("ref를 통해 포커스 됨.")
+    }
+  }));
+  return <input ref={inputRef} ... />;
+}
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+FancyInput = forwardRef(FancyInput);
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## [`useLayoutEffect`](https://ko.reactjs.org/docs/hooks-reference.html#uselayouteffect)
 
-### `yarn test`
+`useLayoutEffect`는 DOM 변경 후에, **동기적**으로 발생하는 `useEffect`입니다. `useLayoutEffect`의 내부에 예정된 갱신은 브라우저가 화면을 그리기 이전 시점에 동기적으로 수행될 것입니다. 화면 갱신 차단의 방지가 가능할 때 표준 `useEffect`를 먼저 사용하세요.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## [`useDebugValue`](https://ko.reactjs.org/docs/hooks-reference.html#usedebugvalue)
 
-### `yarn build`
+useDebugValue는 React 개발자도구에서 사용자 Hook 레이블을 표시하는 데에 사용할 수 있습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```typescript react
+function useFriendStatus(friendID) {
+  const [isOnline, setIsOnline] = useState(null);
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  // ...
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  // Show a label in DevTools next to this Hook
+  // e.g. "FriendStatus: Online"
+  useDebugValue(isOnline ? 'Online' : 'Offline');
 
-### `yarn eject`
+  return isOnline;
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 다양한 커뮤니티 훅
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+사용 플랫폼, 라이브러리에 따라 여러가지 유용한 훅의 형태로 배포되는 라이브러리들이 많습니다.
