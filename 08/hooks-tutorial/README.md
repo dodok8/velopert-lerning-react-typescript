@@ -2,7 +2,7 @@
 
 ## [`useImperativeHandle`](https://ko.reactjs.org/docs/hooks-reference.html#useimperativehandle)
 
-`ref`가 부모 컴포넌트에서 노출될 때, 그 인스턴스를 커스텀해서 사용할 수 있습니다. `[forwardRef](https://ko.reactjs.org/docs/react-api.html#reactforwardref)`와 같이 사용하세요.
+`ref`가 부모 컴포넌트에서 노출될 때, 그 인스턴스를 커스텀해서 사용할 수 있습니다. [`forwardRef`](https://ko.reactjs.org/docs/react-api.html#reactforwardref)와 같이 사용하세요.
 
 ```typescript react
 
