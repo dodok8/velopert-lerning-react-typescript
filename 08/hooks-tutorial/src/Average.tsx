@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 
 function getAverage(numbers: number[]): number {
   console.log('평균값 계산중');
@@ -13,6 +13,15 @@ function getAverage(numbers: number[]): number {
 function Average() {
   const [list, setList] = useState<number[]>([]);
   const [number, setNumber] = useState<number>(0);
+  const id = useRef<number>(1);
+  const setId: (n: number) => void = function (n) {
+    id.current = n;
+  };
+  const printId: () => void = function () {
+    console.log(id.current);
+  };
+
+  const inputEl = useRef<HTMLInputElement>(null);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNumber(parseInt(e.target.value));
@@ -30,7 +39,7 @@ function Average() {
 
   return (
     <div>
-      <input value={number} onChange={onChange} />
+      <input value={number} onChange={onChange} ref={inputEl} />
       <button onClick={onInsert}>등록</button>
       <ul>
         {list.map((value, index) => (
@@ -45,3 +54,6 @@ function Average() {
 }
 
 export default Average;
+function userRef<T>(arg0: null) {
+  throw new Error('Function not implemented.');
+}
